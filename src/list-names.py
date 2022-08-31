@@ -1,17 +1,14 @@
-import argparse
+import sys
 
-
-def main():
-    argparser = argparse.ArgumentParser(
-        description="Extract the names from a simple-fastq file")
-    argparser.add_argument(
-        "fastq",
-        type=argparse.FileType('r')
-    )
-    args = argparser.parse_args()
-
-    print(f"Now I need to process the records in {args.fastq}")
-
-
-if __name__ == '__main__':
-    main()
+def list_names():
+    # load input:
+    inFile = sys.argv[1]
+    with open(inFile,'r') as j:
+        lines = j.readlines()
+    
+    for line in lines:
+        if line.startswith('@'):
+            print(line.strip('@').strip())
+    
+    return ''
+list_names()
